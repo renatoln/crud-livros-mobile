@@ -2,6 +2,8 @@ package br.edu.ifba.renatonovais.crudlivrosmobile.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +28,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static int maior_codigo = -1;
     // the placeholder to set content for each list item
     String[] from = {"titulo", "autor"};
 
@@ -39,6 +42,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CadastroLivroActivity.class);
+                intent.putExtra("codigo", "-1");
+                startActivity(intent);
+            }
+        });
+
+        /*
+        *
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
+        * */
 
     }
 
@@ -57,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             hashMap.put("ano",livro.getAno());
 
             arrayList.add(hashMap);//add the hashmap into arrayList
+            if (Integer.parseInt(livro.getCodigo()) > maior_codigo)
+                maior_codigo = Integer.parseInt(livro.getCodigo());
         }
 
         simpleAdapter=new SimpleAdapter(this,arrayList,R.layout.lista_livro_personalizada,from,to);//Create object and set the parameters for simpleAdapter
@@ -151,6 +175,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static int getNovoCodigo(){
+        return ++maior_codigo;
     }
 
 }

@@ -85,6 +85,7 @@ public class CadastroLivroActivity extends AppCompatActivity {
         Call<Livro> call;
         final String msn;
         if (Integer.parseInt(livro.getCodigo()) == -1) {
+            livro.setCodigo(Integer.toString(MainActivity.getNovoCodigo()));
             call = livroService.insereLivro(livro);
             msn = "inserido";
         }else{
