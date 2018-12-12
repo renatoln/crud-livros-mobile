@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Crud Livros Mobile</string>
+    <string name="titulo">Título</string>
+    <string name="ano">Ano</string>
+    <string name="codigo">Código</string>
+    <string name="editora">Editora</string>
+    <string name="isbn">ISBN</string>
+    <string name="autor">Autor</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="cancelar">Cancelar</string>
 </resources>

@@ -1,7 +1,9 @@
 package br.edu.ifba.renatonovais.crudlivrosmobile.model;
 
-public class Livro {
 
+public class Books {
+
+    private static int numberBooks = 0;
     private String codigo;
     private String ISBN;
     private String titulo;
@@ -9,21 +11,25 @@ public class Livro {
     private String ano;
     private String editora;
 
-    public Livro(String codigo, String ISBN, String titulo, String autor, String ano, String editora) {
+    public Books(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public Books() {
+    }
+
+    public Books(String codigo, String ISBN, String titulo, String autor, String ano, String editora) {
         this.codigo = codigo;
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
         this.ano = ano;
         this.editora = editora;
+        this.numberBooks += 1;
     }
 
     public String getCodigo() {
         return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getISBN() {
@@ -65,4 +71,6 @@ public class Livro {
     public void setEditora(String editora) {
         this.editora = editora;
     }
+
 }
+
