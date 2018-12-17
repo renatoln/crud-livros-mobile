@@ -26,7 +26,7 @@ public interface LivroService {
     Call<Livro> atualizaLivro(@Body Livro livro);
 
     @POST("api_rest/excluirLivro/")
-    Call<Void> excluirLivro(@Body Livro livro);
+    Call<Livro> excluirLivro(@Body Livro livro);
 
 
 }

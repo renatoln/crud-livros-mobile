@@ -8,5 +8,6 @@
     <string name="autor">Autor</string>
     <string name="confirmar">Confirmar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="excluir">Excluir</string>
     <string name="title_activity_main2">Main2Activity</string>
 </resources>
