@@ -1,9 +1,9 @@
 package br.edu.ifba.renatonovais.crudlivrosmobile.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
     SimpleAdapter simpleAdapter;
 
+    ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,15 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        /*
-        *
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-
-        * */
 
     }
 
@@ -85,33 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         simpleAdapter=new SimpleAdapter(this,arrayList,R.layout.lista_livro_personalizada,from,to);//Create object and set the parameters for simpleAdapter
         listViewDeLivros.setAdapter(simpleAdapter);//sets the adapter for listView
-
-        //perform listView item click event
-        listViewDeLivros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),arrayList.get(i).get("titulo"),Toast.LENGTH_LONG).show();//show the selected image in toast according to position
-            }
-        });
     }
-
-    private List<Livro> todosOsLivros() {
-        List<Livro> livros = new ArrayList<>();
-
-        Livro livro1 = new Livro("1",
-                "ISBN23455", "Crud Básico full stack", "Renato Novais","2018", "IFBA tech");
-        Livro livro2 = new Livro("2",
-                "ISBN23455", "Django", "Renato Lima","2017", "GSort");
-        Livro livro3 = new Livro("3",
-                "ISBN23455", "Android", "Letícia Gomes","2014", "Favo");
-
-        livros.add(livro1);
-        livros.add(livro2);
-        livros.add(livro3);
-
-        return livros;
-    }
-
 
     @Override
     protected void onStart() {
@@ -121,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
         //registerForContextMenu(lista);
         LivroService livroService = ServiceGenerator.createService(LivroService.class);
 
-        /*dialog = new ProgressDialog(MainActivity.this);
+        dialog = new ProgressDialog(MainActivity.this);
         dialog.setMessage("Carregando...");
         dialog.setCancelable(false);
-        dialog.show();*/
+        dialog.show();
 
         final Call<List<Livro>> call = livroService.getLivros();
 
@@ -132,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<List<Livro>> call, @NonNull Response<List<Livro>> response) {
 
-                /*if (dialog.isShowing())
-                    dialog.dismiss();*/
+                if (dialog.isShowing())
+                    dialog.dismiss();
                 if (Objects.requireNonNull(response).isSuccessful()) {
                     final List<Livro> listBooks = response.body();
 
@@ -179,6 +146,23 @@ public class MainActivity extends AppCompatActivity {
 
     public static int getNovoCodigo(){
         return ++maior_codigo;
+    }
+
+    private List<Livro> todosOsLivros() {
+        List<Livro> livros = new ArrayList<>();
+
+        Livro livro1 = new Livro("1",
+                "ISBN23455", "Crud Básico full stack", "Renato Novais","2018", "IFBA tech");
+        Livro livro2 = new Livro("2",
+                "ISBN23455", "Django", "Renato Lima","2017", "GSort");
+        Livro livro3 = new Livro("3",
+                "ISBN23455", "Android", "Letícia Gomes","2014", "Favo");
+
+        livros.add(livro1);
+        livros.add(livro2);
+        livros.add(livro3);
+
+        return livros;
     }
 
 }

@@ -186,7 +186,7 @@ public class CadastroLivroActivity extends AppCompatActivity {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                     if (response.isSuccessful()) {
-                        Toast.makeText(getBaseContext(), "Livro excluido com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "Livro excluído com sucesso", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(CadastroLivroActivity.this, MainActivity.class));
                         finish();
                     } else {
